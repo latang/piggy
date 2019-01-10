@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button signIn;
 
+    private Button signInMerchant;
+
     private CheckBox rememberMe;
 
     private ProgressBar progress;
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         signIn = findViewById(R.id.sign_in);
+        signInMerchant = findViewById(R.id.sign_in2);
         rememberMe = findViewById(R.id.remember_me);
         progress = findViewById(R.id.progress);
 
@@ -196,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         username.setEnabled(enabled);
         password.setEnabled(enabled);
         signIn.setEnabled(enabled);
+        signInMerchant.setEnabled(enabled);
     }
 }
 
