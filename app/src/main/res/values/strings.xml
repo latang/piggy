@@ -3,7 +3,8 @@
     <string name="welcome">Welcome to PIGGY!</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="sign_in">Customer</string>
+    <string name="sign_in_customer">Customer</string>
+    <string name="sign_in_merchant">Merchant</string>
     <string name="mer_sign_in">Merchant</string>
     <string name="remember_me">Remember Me</string>
     <string name="summary_title">Hello, %1$s</string>
