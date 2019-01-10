@@ -20,17 +20,31 @@ import java.util.List;
  */
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
-    public TransactionAdapter() {
+    /**
+     * The list of credit card transactions which will be adapted to the UI.
+     */
+    private List<Transaction> transactions = new ArrayList<>();
 
+    /**
+     * Takes in the list of transactions that should be rendered and a listener to receive callbacks
+     * if the user clicks on a particular row.
+     */
+    public TransactionAdapter(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     /**
-     * Called when the UI needs the a new row (at {position}) to be <b>created</b>.
+     * Called when the UI needs the a new row (at {position}) to be <b>created</b>. In this case,
+     * all of our rows look the same, so we just inflate the same layout for all rows.
+     * <br>
+     * The new row isn't filled with data yet, that's done by
+     * {@link TransactionAdapter#onBindViewHolder(ViewHolder, int)}
      */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_transaction, parent, false);
+        return new ViewHolder(view);
     }
 
     /**
@@ -39,7 +53,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
      */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-
+        // Use the transaction at index {position} to set up the row's UI widgets
+        holder.merchant.setText(transactions.get(position).getMerchant());
+        holder.amount.setText(transactions.get(position).getAmount());
     }
 
     /**
@@ -47,7 +63,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
      */
     @Override
     public int getItemCount() {
-        return 0;
+        return transactions.size();
     }
 
     /**
