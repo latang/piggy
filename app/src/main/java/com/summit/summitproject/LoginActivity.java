@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar progress;
 
+    private Button merchantButton;
+    private Button customerButton;
     /**
      * Called the first time an Activity is created, but before any UI is shown to the user.
      * Prepares the layout and assigns UI widget variables.
@@ -72,6 +74,10 @@ public class LoginActivity extends AppCompatActivity {
         signInMerchant = findViewById(R.id.sign_in2);
         rememberMe = findViewById(R.id.remember_me);
         progress = findViewById(R.id.progress);
+
+        merchantButton = findViewById(R.id.mer_sign_in);
+        customerButton = findViewById(R.id.sign_in);
+
 
         setupWidgets();
 
@@ -91,6 +97,13 @@ public class LoginActivity extends AppCompatActivity {
 
         final String inputtedUsername = username.getText().toString();
         final String inputtedPassword = password.getText().toString();
+
+        merchantButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,MerchantTerminalActivity.class));
+            }
+        });
 
         signIn.setOnClickListener(new OnClickListener() {
             @Override
