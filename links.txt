@@ -1,0 +1,2 @@
+https://github.com/android-summit/api-sample-app
+https://github.com/nessieisreal/nessie-android-sdk
