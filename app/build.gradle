@@ -35,7 +35,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     //Added Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-database:16.0.3'
 
     //For Nessie API
     implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
@@ -46,8 +47,7 @@ dependencies {
 
     //For Nessie API
     implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
+    implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
 }
 
 repositories {
