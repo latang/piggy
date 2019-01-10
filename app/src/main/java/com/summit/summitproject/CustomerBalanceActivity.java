@@ -1,5 +1,6 @@
 package com.summit.summitproject;
 
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,8 +10,17 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.support.design.widget.NavigationView;
+import com.bumptech.glide.Glide;
+import com.summit.summitproject.prebuilt.utils.CircleGlide;
+import com.summit.summitproject.prebuilt.utils.CustomTypefaceSpan;
+import com.summit.summitproject.prebuilt.utils.AppBarStateChangeListener;
 
-public class CustomerBalanceActivity extends AppCompatActivity {
+
+
+public class CustomerBalanceActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
 
@@ -51,7 +61,7 @@ public class CustomerBalanceActivity extends AppCompatActivity {
         });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
+/*        navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -66,9 +76,42 @@ public class CustomerBalanceActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+                */
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        View header = navigationView.getHeaderView(0);
+        ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
+        Glide.with(this)
+                .load(Uri.parse("https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"))
+                .transform(new CircleGlide(this))
+                .into(imageView);
     }
 
     @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.search) {
+            // Handle the camera action
+        } else if (id == R.id.redeem) {
+
+        } else if (id == R.id.saved) {
+
+        } else if (id == R.id.sign_out) {
+
+        } else if (id == R.id.setting) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -76,5 +119,5 @@ public class CustomerBalanceActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
