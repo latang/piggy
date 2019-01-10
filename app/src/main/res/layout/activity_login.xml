@@ -53,7 +53,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:enabled="false"
-        android:text="@string/sign_in"
+        android:text="@string/sign_in_customer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/sign_in2"
         app:layout_constraintTop_toBottomOf="@+id/remember_me" />
@@ -66,7 +66,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:enabled="false"
-        android:text="merchent"
+        android:text="@string/sign_in_merchant"
         app:layout_constraintEnd_toStartOf="@+id/sign_in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/remember_me" />
