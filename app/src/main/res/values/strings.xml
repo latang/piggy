@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Summit Project</string>
+    <string name="app_name">Piggy</string>
     <string name="welcome">Welcome to PIGGY!</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
