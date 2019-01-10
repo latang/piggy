@@ -3,6 +3,7 @@ package com.summit.summitproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -107,7 +108,6 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(Object result) {
                 List<Customer> customers = (List<Customer>) result;
                 // do something with the list of customers here
-                Log.d("LoginActivity", customers.toString());
             }
 
             @Override
@@ -137,6 +137,36 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
+                            // test
+                            String testPhoneNum = "3312096169";
+
+                            Log.d("test", "pls");
+
+                            DatabaseReference testRef = mDatabase.child("customerInformation");
+
+                            Log.d("test", testRef.toString());
+
+                            testRef.child(testPhoneNum).child("Stores").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    for(DataSnapshot store: dataSnapshot.getChildren()){
+
+                                        String storeKey = store.getKey();
+                                        double storeVal = store.getValue(Double.class);
+                                        Log.d("test", "key: " + storeKey + ", val: " + storeVal);
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            // end test
+
                             Intent intent = new Intent(LoginActivity.this,MerchantTerminalActivity.class);
 //                            intent.putExtra("phoneNumber",inputtedUsername);
                             PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
