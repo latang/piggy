@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.summit.summitproject.prebuilt.login.LoginListener;
 import com.summit.summitproject.prebuilt.login.LoginManager;
 import com.summit.summitproject.prebuilt.model.Transaction;
@@ -57,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button merchantButton;
     private Button customerButton;
+
+    private DatabaseReference mDatabase;
     /**
      * Called the first time an Activity is created, but before any UI is shown to the user.
      * Prepares the layout and assigns UI widget variables.
@@ -75,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         merchantButton = findViewById(R.id.mer_sign_in);
         customerButton = findViewById(R.id.sign_in);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference("data");
+
 
         setupWidgets();
 
@@ -92,19 +102,49 @@ public class LoginActivity extends AppCompatActivity {
         username.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
 
-        final String inputtedUsername = username.getText().toString();
-        final String inputtedPassword = password.getText().toString();
-
         merchantButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,MerchantTerminalActivity.class));
+
+                final String inputtedUsername = username.getText().toString();
+                final String inputtedPassword = password.getText().toString();
+
+                Log.d("message", "clicked");
+
+                mDatabase.child("merchantInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            Intent intent = new Intent(LoginActivity.this,MerchantTerminalActivity.class);
+//                            intent.putExtra("phoneNumber",inputtedUsername);
+                            PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                            startActivity(intent);
+                        } else {
+                            // User does not exist. NOW call createUserWithEmailAndPassword
+                            showToast("Invalid username and password");
+                            username.setText("");
+                            password.setText("");
+                            // Your previous code here.
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
         signIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String inputtedUsername = username.getText().toString();
+                String inputtedPassword = password.getText().toString();
+
                 // Don't allow user input while logging in & show the progress bar
                 setAllEnabled(false);
                 progress.setVisibility(View.VISIBLE);
@@ -209,6 +249,15 @@ public class LoginActivity extends AppCompatActivity {
         username.setEnabled(enabled);
         password.setEnabled(enabled);
         signIn.setEnabled(enabled);
+    }
+
+    private void showToast(final String message) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 
