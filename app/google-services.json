@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "958145385699",
+    "firebase_url": "https://piggy-15db9.firebaseio.com",
+    "project_id": "piggy-15db9",
+    "storage_bucket": "piggy-15db9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958145385699:android:935b3f88690a97b9",
+        "android_client_info": {
+          "package_name": "com.summit.summitproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958145385699-gbkvjj1l53r7paee7vump5cfaeavnr5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiDcbVM6xbSPFo5hgSCdNbn31GQaV1NMA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
