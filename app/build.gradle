@@ -41,6 +41,16 @@ dependencies {
 
     //For Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    //For Nessie API
+    implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
+
+repositories {
+    mavenCentral()
 }
 
 //For Firebase

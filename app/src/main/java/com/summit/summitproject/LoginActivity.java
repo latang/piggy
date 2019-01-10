@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText password;
 
-    private Button signIn;
+    //private Button signIn;
 
     private CheckBox rememberMe;
 
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button merchantButton;
     private Button customerButton;
+
     /**
      * Called the first time an Activity is created, but before any UI is shown to the user.
      * Prepares the layout and assigns UI widget variables.
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        signIn = findViewById(R.id.sign_in);
+        //signIn = findViewById(R.id.sign_in);
         rememberMe = findViewById(R.id.remember_me);
         progress = findViewById(R.id.progress);
 
@@ -98,24 +99,32 @@ public class LoginActivity extends AppCompatActivity {
         merchantButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,MerchantTerminalActivity.class));
+                startActivity(new Intent(LoginActivity.this, MerchantTerminalActivity.class));
             }
         });
 
-        signIn.setOnClickListener(new OnClickListener() {
+        customerButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Don't allow user input while logging in & show the progress bar
-                setAllEnabled(false);
-                progress.setVisibility(View.VISIBLE);
-
-                // Instantiate the login manager, passing the username, password, and result listener
-                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
-
-                // Kick off the login network call
-                loginManager.execute();
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
             }
         });
+
+
+//        signIn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Don't allow user input while logging in & show the progress bar
+//                setAllEnabled(false);
+//                progress.setVisibility(View.VISIBLE);
+//
+//                // Instantiate the login manager, passing the username, password, and result listener
+//                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
+//
+//                // Kick off the login network call
+//                loginManager.execute();
+//            }
+//        });
 
         rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -154,10 +163,12 @@ public class LoginActivity extends AppCompatActivity {
      */
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
 
         @Override
         public void afterTextChanged(Editable s) {
@@ -165,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
             // and password.
             String usernameText = username.getText().toString().trim();
             String passwordText = password.getText().toString().trim();
-            signIn.setEnabled(usernameText.length() > 0 && passwordText.length() > 0);
+            //signIn.setEnabled(usernameText.length() > 0 && passwordText.length() > 0);
         }
     };
 
@@ -208,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
     private void setAllEnabled(boolean enabled) {
         username.setEnabled(enabled);
         password.setEnabled(enabled);
-        signIn.setEnabled(enabled);
+        //signIn.setEnabled(enabled);
     }
 }
 
