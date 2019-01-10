@@ -11,7 +11,7 @@
     <string name="summary_title">Hello, %1$s</string>
     <string name="summary_subtitle">Your recent transactions for Card x%1$s:</string>
 
-
+    <color name="white">#FFFFFF</color>
 
     <string name="customer_phone_num">Customer Phone Number</string>
     <string name="desired_amount">Enter Desired Amount</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#f78fb3</color> // top bar color
-    <color name="colorPrimaryDark">#f78fb3</color>// f8a5c2 // background color where time is
+    <color name="colorPrimaryDark">#e582a4</color>// f8a5c2 // background color where time is
     <color name="colorAccent">#f78fb3</color>
 
     <color name="black_overlay">#66000000</color>

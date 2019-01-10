@@ -13,16 +13,16 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimary" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="410dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="128dp"
         android:layout_marginTop="@dimen/space56"
-        android:layout_marginEnd="156dp"
+        android:layout_marginEnd="122dp"
         android:src="@drawable/logo" />
     <TextView
         android:layout_width="wrap_content"
