@@ -28,9 +28,20 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:paddingLeft="@dimen/space16"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view"
-        app:headerLayout="@layout/nav_header" />
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"
+        android:background="@color/colorPrimaryDark"
+        app:itemTextColor="@drawable/drawer_item"
+        app:itemBackground="@drawable/selector_menu"
+        app:itemTextAppearance="@style/MenuItem"
+        app:paddingStart="@dimen/space8"
+        />
+
+        <!--app:headerLayout="@layout/nav_header" -->
+
+
 
 
 </android.support.v4.widget.DrawerLayout>

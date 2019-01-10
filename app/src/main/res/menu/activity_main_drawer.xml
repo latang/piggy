@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/search"
+            android:title="SEARCH" />
+        <item
+            android:id="@+id/redeem"
+            android:title="REDEEM" />
+        <item
+            android:id="@+id/saved"
+            android:title="SAVED RECIPES" />
+        <item
+            android:id="@+id/setting"
+            android:title="SETTINGS" />
+        <item
+            android:id="@+id/sign_out"
+            android:title="SIGN OUT" />
+
+    </group>
+</menu>

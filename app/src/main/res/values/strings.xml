@@ -8,6 +8,7 @@
     <string name="mer_sign_in">Merchant</string>
     <string name="remember_me">Remember Me</string>
     <string name="balance">Balance: %1$s</string>
+    <string name="Customer">%1$s %2$s</string>
     <string name="summary_title">Hello, %1$s</string>
     <string name="summary_subtitle">Your recent transactions for Card x%1$s:</string>
 
