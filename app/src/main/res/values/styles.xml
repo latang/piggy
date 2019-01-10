@@ -29,4 +29,15 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="Regular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SourceSansPro-Regular.otf</item>
+    </style>
+
+    <style name="Full" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,18 +16,23 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.reimaginebanking.api.nessieandroidsdk.NessieError;
+import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
+import com.reimaginebanking.api.nessieandroidsdk.models.Customer;
+import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 import com.summit.summitproject.prebuilt.login.LoginListener;
 import com.summit.summitproject.prebuilt.login.LoginManager;
 import com.summit.summitproject.prebuilt.model.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The first screen of our app. Takes in a username and password and interacts with the
  * {@link LoginManager} to retrieve user details. Also allows the user to check "Remember Me"
  * to locally store and recall credentials.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     /**
      * The key under which the <b>username</b> will be stored in {@link SharedPreferences}.
@@ -84,6 +90,23 @@ public class LoginActivity extends AppCompatActivity {
         rememberMe.setChecked(sharedPreferences.contains(PREF_USERNAME));
         username.setText(sharedPreferences.getString(PREF_USERNAME, ""));
         password.setText(sharedPreferences.getString(PREF_PASSWORD, ""));
+
+
+        //change later
+        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
+        client.CUSTOMER.getCustomers(new NessieResultsListener() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Customer> customers = (List<Customer>) result;
+                // do something with the list of customers here
+                Log.d("LoginActivity", customers.toString());
+            }
+
+            @Override
+            public void onFailure(NessieError error) {
+                // handle error
+            }
+        });
     }
 
     /**
