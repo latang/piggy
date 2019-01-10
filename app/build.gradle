@@ -37,8 +37,16 @@ dependencies {
     //Added Firebase
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-database:16.0.3'
+
+    //For Nessie API
+    implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
+
+    //For Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+
+    //For Nessie API
+    implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
     implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
 }
 
