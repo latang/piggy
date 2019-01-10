@@ -16,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
 import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
 import com.reimaginebanking.api.nessieandroidsdk.models.Customer;
@@ -64,6 +69,7 @@ public class LoginActivity extends BaseActivity {
     private Button merchantButton;
     private Button customerButton;
 
+    private DatabaseReference mDatabase;
     /**
      * Called the first time an Activity is created, but before any UI is shown to the user.
      * Prepares the layout and assigns UI widget variables.
@@ -82,6 +88,8 @@ public class LoginActivity extends BaseActivity {
         merchantButton = findViewById(R.id.mer_sign_in);
         customerButton = findViewById(R.id.sign_in);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference("data");
+
 
         setupWidgets();
 
@@ -92,21 +100,21 @@ public class LoginActivity extends BaseActivity {
         password.setText(sharedPreferences.getString(PREF_PASSWORD, ""));
 
 
-        //change later
-        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
-        client.CUSTOMER.getCustomers(new NessieResultsListener() {
-            @Override
-            public void onSuccess(Object result) {
-                List<Customer> customers = (List<Customer>) result;
-                // do something with the list of customers here
-                Log.d("LoginActivity", customers.toString());
-            }
-
-            @Override
-            public void onFailure(NessieError error) {
-                // handle error
-            }
-        });
+//        //change later
+//        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
+//        client.CUSTOMER.getCustomers(new NessieResultsListener() {
+//            @Override
+//            public void onSuccess(Object result) {
+//                List<Customer> customers = (List<Customer>) result;
+//                // do something with the list of customers here
+//                Log.d("LoginActivity", customers.toString());
+//            }
+//
+//            @Override
+//            public void onFailure(NessieError error) {
+//                // handle error
+//            }
+//        });
     }
 
     /**
@@ -116,18 +124,58 @@ public class LoginActivity extends BaseActivity {
         username.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
 
-        final String inputtedUsername = username.getText().toString();
-        final String inputtedPassword = password.getText().toString();
-
         merchantButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, MerchantTerminalActivity.class));
+
+                final String inputtedUsername = username.getText().toString();
+                final String inputtedPassword = password.getText().toString();
+
+                Log.d("message", "clicked");
+
+                mDatabase.child("merchantInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            Intent intent = new Intent(LoginActivity.this,MerchantTerminalActivity.class);
+//                            intent.putExtra("phoneNumber",inputtedUsername);
+                            PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                            startActivity(intent);
+                        } else {
+                            // User does not exist. NOW call createUserWithEmailAndPassword
+                            showToast("Invalid username and password");
+                            username.setText("");
+                            password.setText("");
+                            // Your previous code here.
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
         customerButton.setOnClickListener(new OnClickListener() {
             @Override
+//            public void onClick(View v) {
+//
+//                String inputtedUsername = username.getText().toString();
+//                String inputtedPassword = password.getText().toString();
+//
+//                // Don't allow user input while logging in & show the progress bar
+//                setAllEnabled(false);
+//                progress.setVisibility(View.VISIBLE);
+//
+//                // Instantiate the login manager, passing the username, password, and result listener
+//                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
+//
+//                // Kick off the login network call
+//                loginManager.execute();
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
             }
@@ -243,6 +291,15 @@ public class LoginActivity extends BaseActivity {
         username.setEnabled(enabled);
         password.setEnabled(enabled);
         //signIn.setEnabled(enabled);
+    }
+
+    private void showToast(final String message) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 
