@@ -25,7 +25,11 @@
         </activity>
         <activity android:name=".MerchantTerminalActivity" />
         <activity android:name=".SummaryActivity" />
-        <activity android:name=".CustomerBalanceActivity"></activity>
+        <activity
+            android:name=".CustomerBalanceActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
