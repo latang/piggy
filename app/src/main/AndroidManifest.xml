@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Splash"
+            android:theme="@style/Full"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MerchantTerminalActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SummaryActivity" />
         <activity
             android:name=".CustomerBalanceActivity"

@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * {@link LoginManager} to retrieve user details. Also allows the user to check "Remember Me"
  * to locally store and recall credentials.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     /**
      * The key under which the <b>username</b> will be stored in {@link SharedPreferences}.
