@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.android.support:support-annotations:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
 
     // Easy networking library from Square
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
@@ -38,6 +39,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
 }
 
 repositories {

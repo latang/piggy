@@ -21,18 +21,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.reimaginebanking.api.nessieandroidsdk.NessieError;
+import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
+import com.reimaginebanking.api.nessieandroidsdk.models.Customer;
+import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 import com.summit.summitproject.prebuilt.login.LoginListener;
 import com.summit.summitproject.prebuilt.login.LoginManager;
 import com.summit.summitproject.prebuilt.model.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The first screen of our app. Takes in a username and password and interacts with the
  * {@link LoginManager} to retrieve user details. Also allows the user to check "Remember Me"
  * to locally store and recall credentials.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     /**
      * The key under which the <b>username</b> will be stored in {@link SharedPreferences}.
@@ -55,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText password;
 
-    private Button signIn;
+    //private Button signIn;
 
     private CheckBox rememberMe;
 
@@ -76,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        signIn = findViewById(R.id.sign_in);
+        //signIn = findViewById(R.id.sign_in);
         rememberMe = findViewById(R.id.remember_me);
         progress = findViewById(R.id.progress);
 
@@ -93,6 +98,23 @@ public class LoginActivity extends AppCompatActivity {
         rememberMe.setChecked(sharedPreferences.contains(PREF_USERNAME));
         username.setText(sharedPreferences.getString(PREF_USERNAME, ""));
         password.setText(sharedPreferences.getString(PREF_PASSWORD, ""));
+
+
+        //change later
+        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
+        client.CUSTOMER.getCustomers(new NessieResultsListener() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Customer> customers = (List<Customer>) result;
+                // do something with the list of customers here
+                Log.d("LoginActivity", customers.toString());
+            }
+
+            @Override
+            public void onFailure(NessieError error) {
+                // handle error
+            }
+        });
     }
 
     /**
@@ -138,24 +160,42 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signIn.setOnClickListener(new OnClickListener() {
+        customerButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                String inputtedUsername = username.getText().toString();
-                String inputtedPassword = password.getText().toString();
-
-                // Don't allow user input while logging in & show the progress bar
-                setAllEnabled(false);
-                progress.setVisibility(View.VISIBLE);
-
-                // Instantiate the login manager, passing the username, password, and result listener
-                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
-
-                // Kick off the login network call
-                loginManager.execute();
+//            public void onClick(View v) {
+//
+//                String inputtedUsername = username.getText().toString();
+//                String inputtedPassword = password.getText().toString();
+//
+//                // Don't allow user input while logging in & show the progress bar
+//                setAllEnabled(false);
+//                progress.setVisibility(View.VISIBLE);
+//
+//                // Instantiate the login manager, passing the username, password, and result listener
+//                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
+//
+//                // Kick off the login network call
+//                loginManager.execute();
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
             }
         });
+
+
+//        signIn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Don't allow user input while logging in & show the progress bar
+//                setAllEnabled(false);
+//                progress.setVisibility(View.VISIBLE);
+//
+//                // Instantiate the login manager, passing the username, password, and result listener
+//                LoginManager loginManager = new LoginManager(inputtedUsername, inputtedPassword, loginListener);
+//
+//                // Kick off the login network call
+//                loginManager.execute();
+//            }
+//        });
 
         rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -194,10 +234,12 @@ public class LoginActivity extends AppCompatActivity {
      */
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
 
         @Override
         public void afterTextChanged(Editable s) {
@@ -205,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
             // and password.
             String usernameText = username.getText().toString().trim();
             String passwordText = password.getText().toString().trim();
-            signIn.setEnabled(usernameText.length() > 0 && passwordText.length() > 0);
+            //signIn.setEnabled(usernameText.length() > 0 && passwordText.length() > 0);
         }
     };
 
@@ -248,7 +290,7 @@ public class LoginActivity extends AppCompatActivity {
     private void setAllEnabled(boolean enabled) {
         username.setEnabled(enabled);
         password.setEnabled(enabled);
-        signIn.setEnabled(enabled);
+        //signIn.setEnabled(enabled);
     }
 
     private void showToast(final String message) {
