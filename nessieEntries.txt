@@ -1,0 +1,3 @@
+[Customer{mId='5c3769b4322fa06b67794312', mFirstName='Brannon', mLastName='Cassin', mAddress=Address{mStreetNumber='295', mStreetName='Sammy Ball Road', mCity='Hinton', mState='West Virginia', mZip='25951'}},
+Customer{mId='5c3769b4322fa06b67794313', mFirstName='Danial', mLastName='Walker', mAddress=Address{mStreetNumber='7858', mStreetName='Dutch Lane Northwest', mCity='Johnstown', mState='Ohio', mZip='43031'}},
+Customer{mId='5c3769b5322fa06b67794314', mFirstName='Zachery', mLastName='O'Kon', mAddress=Address{mStreetNumber='2556', mStreetName='Twin Creek Road', mCity='Sadieville', mState='Kentucky', mZip='40370'}}]
