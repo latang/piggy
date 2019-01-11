@@ -80,8 +80,8 @@ public class FragmentHome extends Fragment {
   
     private List<ItemRecipe> setupRecipe(){
         itemList = new ArrayList<>();
-        String recipe[] = {"BLOOD ORANGE CAKE", "SEMIFREDDO TIRAMISU", "MARBLE CAKE", "RICE PUDDING", "RAINBOW CAKE", "ICE CREAM", "STROWBERRY CAKE", "CUPCAKE FRUIT"};
-        String img[] = {"https://images.pexels.com/photos/53468/dessert-orange-food-chocolate-53468.jpeg?h=350&auto=compress&cs=tinysrgb",
+        String recipe[] = {"STARBUCKS", "SEMIFREDDO TIRAMISU", "MARBLE CAKE", "RICE PUDDING", "RAINBOW CAKE", "ICE CREAM", "STROWBERRY CAKE", "CUPCAKE FRUIT"};
+        String img[] = {"http://backgroundcheckall.com/wp-content/uploads/2017/12/starbucks-logo-transparent-background-10.png",
                 "https://images.pexels.com/photos/159887/pexels-photo-159887.jpeg?h=350&auto=compress",
                 "https://images.pexels.com/photos/136745/pexels-photo-136745.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                 "https://images.pexels.com/photos/39355/dessert-raspberry-leaf-almond-39355.jpeg?h=350&auto=compress&cs=tinysrgb",
@@ -89,7 +89,7 @@ public class FragmentHome extends Fragment {
                 "https://images.pexels.com/photos/8382/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb",
                 "https://images.pexels.com/photos/51186/pexels-photo-51186.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                 "https://images.pexels.com/photos/55809/dessert-strawberry-tart-berry-55809.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"};
-        String time[] = {"1h 5'", "30m", "1h 10'", "50m", "20m", "1h 20'", "20m", "1h 20'"};
+        String time[] = {"240 points", "30m", "1h 10'", "50m", "20m", "1h 20'", "20m", "1h 20'"};
         float rating[] = {3, 4, 4, 3, 5, 4, 4, 3};
 
         for (int i = 0; i<recipe.length; i++){
