@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MerchantTerminalActivity extends AppCompatActivity {
 
@@ -34,6 +37,11 @@ public class MerchantTerminalActivity extends AppCompatActivity {
     private VibrateFeedback tapFeedback;
 
     private DatabaseReference mDatabase;
+
+    public Double currentBalance;
+
+    private RadioButton balance;
+    private RadioButton storeCredit;
 
     private void printDbReference(DatabaseReference reference){
         Log.d(TAG, reference.toString());
@@ -51,6 +59,9 @@ public class MerchantTerminalActivity extends AppCompatActivity {
         sendAmount = findViewById(R.id.sendAmount);
         sendButton = findViewById(R.id.sendButton);
 //        progressBar = findViewById(R.id.progressBar);
+
+        storeCredit = findViewById(R.id.storeCredit);
+        balance = findViewById(R.id.addBalance);
 
         nfcNdefReader = new NfcNdefReader(
                 this,
@@ -149,22 +160,44 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 
                 double change = Double.parseDouble(inputSendAmount);
 
-                Log.d("debug", "change: " + change);
+                DatabaseReference customersRef = mDatabase.child("customerInformation");
+
+                if(storeCredit.isChecked()){
+                    Log.d(TAG, "storeCredit");
+                }
+                else{
+                    Log.d(TAG,"balance");
+
+                    DatabaseReference testRef = mDatabase.child("customerInformation");
+
+                    testRef.child(inputPhoneNum).child("totalBalance").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            double balance = dataSnapshot.getValue(Double.class);
+                            currentBalance = balance;
+                            Log.d("test","method balance: " + currentBalance);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
+
+                    Log.d("test","after balance: " + currentBalance);
+                }
 
 //                progressBar.setVisibility(View.VISIBLE);
 
-                DatabaseReference accountsRef = mDatabase.child("accountInformation");
-
-                DatabaseReference newInformation = accountsRef.push();
-
-                newInformation.setValue(new Post(inputPhoneNum,change));
+//                DatabaseReference accountsRef = mDatabase.child("customerInformation");
+//
+//                DatabaseReference newInformation = accountsRef.push();
+//
+//                newInformation.setValue(new Post(inputPhoneNum,change));
 
                 customerPhoneNum.setText("");
                 sendAmount.setText("");
 
 //                progressBar.setVisibility(View.INVISIBLE);
 
-                Log.d("debug", "sent!");
             }
         });
     }

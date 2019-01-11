@@ -3,6 +3,7 @@ package com.summit.summitproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -99,7 +100,6 @@ public class LoginActivity extends BaseActivity {
         username.setText(sharedPreferences.getString(PREF_USERNAME, ""));
         password.setText(sharedPreferences.getString(PREF_PASSWORD, ""));
 
-
         //change later
         NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
         client.CUSTOMER.getCustomers(new NessieResultsListener() {
@@ -131,32 +131,68 @@ public class LoginActivity extends BaseActivity {
                 final String inputtedUsername = username.getText().toString();
                 final String inputtedPassword = password.getText().toString();
 
-                Log.d("message", "clicked");
+                if(inputtedUsername.length() != 0 && inputtedPassword.length() != 0) {
 
-                mDatabase.child("merchantInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            Intent intent = new Intent(LoginActivity.this,MerchantTerminalActivity.class);
-//                            intent.putExtra("phoneNumber",inputtedUsername);
-                            PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
-                            startActivity(intent);
-                        } else {
-                            // User does not exist. NOW call createUserWithEmailAndPassword
-                            showToast("Invalid username and password");
-                            username.setText("");
-                            password.setText("");
-                            // Your previous code here.
+                    mDatabase.child("merchantInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+
+                                // test
+
+                                String testPhoneNum = "3312096169";
+
+                                Log.d("test", "pls");
+
+                                DatabaseReference testRef = mDatabase.child("customerInformation");
+
+                                Log.d("test", testRef.toString());
+
+                                testRef.child(testPhoneNum).child("Stores").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        for(DataSnapshot store: dataSnapshot.getChildren()){
+                                            String storeKey = store.getKey();
+                                            double storeVal = store.getValue(Double.class);
+                                            Log.d("test", "key: " + storeKey + ", val: " + storeVal);
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                // end test
+
+
+                                Intent intent = new Intent(LoginActivity.this, MerchantTerminalActivity.class);
+                                //                            intent.putExtra("phoneNumber",inputtedUsername);
+                                PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                                startActivity(intent);
+                            } else {
+                                // User does not exist. NOW call createUserWithEmailAndPassword
+                                showToast("Invalid username and password");
+                                username.setText("");
+                                password.setText("");
+                                // Your previous code here.
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    }
+                    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                }
+                else{
+                    showToast("Empty username or password");
+                }
             }
         });
 
