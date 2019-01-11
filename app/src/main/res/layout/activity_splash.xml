@@ -24,14 +24,16 @@
         android:layout_marginTop="@dimen/space56"
         android:layout_marginEnd="122dp"
         android:src="@drawable/logo" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space16"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Pig it"
-        android:textSize="@dimen/h2"
+        android:layout_marginBottom="@dimen/space16"
+        android:text="Oink!"
+        android:textAppearance="@style/Regular"
         android:textColor="@android:color/white"
-        android:textAppearance="@style/Regular"/>
+        android:textSize="@dimen/h2"
+        android:textStyle="italic" />
 </RelativeLayout>
