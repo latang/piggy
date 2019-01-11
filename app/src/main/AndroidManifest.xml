@@ -41,7 +41,6 @@
         <activity
             android:name=".CustomerBalanceActivity"
             android:exported="true" />
-
     </application>
 
 </manifest>

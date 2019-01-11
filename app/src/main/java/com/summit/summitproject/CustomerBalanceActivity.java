@@ -47,7 +47,7 @@ import com.summit.summitproject.prebuilt.model.Transaction;
 import org.w3c.dom.Text;
 
 
-public class CustomerBalanceActivity extends AppCompatActivity
+public class CustomerBalanceActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "CustomerActivity";
@@ -64,6 +64,11 @@ public class CustomerBalanceActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_balance);
+        //setContentView(R.layout.nav_header_main);
+
+        setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+
+
 
         FragmentTransaction ft;
         FragmentHome fragmentHome = new FragmentHome();
@@ -73,6 +78,7 @@ public class CustomerBalanceActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //customerPhoneNum = findViewById(R.id.username);
         customerPhoneNum = PiggyBApplication.applicationState.phoneNumber;
 
         ActionBar actionbar = getSupportActionBar();
@@ -89,6 +95,7 @@ public class CustomerBalanceActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         balance = headerView.findViewById(R.id.BalanceView);
         name = headerView.findViewById(R.id.CustomerName);
+        Log.d(TAG, "name" + name +" balance: " + balance);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -162,12 +169,18 @@ public class CustomerBalanceActivity extends AppCompatActivity
         });
 
 
+
+
+
 //                            for(DataSnapshot store: dataSnapshot.getChildren()){
 //                                String storeKey = store.getKey();
 //                                double storeVal = store.getValue(Double.class);
 //                                Log.d(“test”, “key: ” + storeKey + “, val: ” + storeVal);
 //
 //                            }
+
+
+
 
 
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
