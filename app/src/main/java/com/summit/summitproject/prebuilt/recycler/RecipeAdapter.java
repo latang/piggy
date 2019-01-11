@@ -61,7 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ItemRecipe itemRecipe = items.get(position);
         holder.recipe.setText(itemRecipe.getRecipe());
-        holder.time.setText(itemRecipe.getTime());
+        holder.time.setText("$ " +itemRecipe.getTime());
         holder.ratingBar.setRating(itemRecipe.getRating());
         Glide.with(context)
                 .load(Uri.parse(itemRecipe.getImg()))
