@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -38,6 +38,19 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MenuItem">
+        <item name="android:padding">0dp</item>
+        <item name="android:textSize">@dimen/h3</item>
+    </style>
+
+    <style name="SemiBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SourceSansPro-Semibold.otf</item>
+    </style>
+
+    <style name="Light" parent="android:TextAppearance">
+        <item name="fontPath">fonts/SourceSansPro-LightIt.otf</item>
     </style>
 
 </resources>

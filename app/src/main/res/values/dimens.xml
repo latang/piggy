@@ -11,4 +11,6 @@
     <dimen name="h1">22dp</dimen>
     <dimen name="h2">18dp</dimen>
     <dimen name="h3">14dp</dimen>
+
+    <dimen name="refresh_button">10dp</dimen>
 </resources>
