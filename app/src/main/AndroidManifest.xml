@@ -36,7 +36,6 @@
         <activity android:name=".SummaryActivity" android:exported="true"/>
         <activity
             android:name=".CustomerBalanceActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
 
         </activity>
