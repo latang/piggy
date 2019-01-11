@@ -41,6 +41,8 @@
         <activity
             android:name=".CustomerBalanceActivity"
             android:exported="true" />
+        <activity android:name=".RedeemActivity"
+            />
     </application>
 
 </manifest>

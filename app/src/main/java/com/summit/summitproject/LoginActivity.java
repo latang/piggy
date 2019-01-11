@@ -198,6 +198,7 @@ public class LoginActivity extends BaseActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                                PiggyBApplication.applicationState.context = LoginActivity.this;
                                 startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
                                 //                            intent.putExtra("phoneNumber",inputtedUsername);
                             } else {

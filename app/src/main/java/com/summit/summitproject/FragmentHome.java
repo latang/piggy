@@ -1,10 +1,14 @@
 package com.summit.summitproject;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.ContextWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
 import android.support.annotation.DimenRes;
@@ -45,9 +50,11 @@ public class FragmentHome extends Fragment {
     private RecyclerView recyclerView;
     private RecipeAdapter mAdapter;
     private AppCompatActivity appCompatActivity;
+    private Activity rootRoot;
 
-    public FragmentHome(){
+    public FragmentHome(Activity root){
         setHasOptionsMenu(true);
+        rootRoot = root;
     }
     public void onCreate(Bundle a){
         super.onCreate(a);
@@ -70,7 +77,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    ArrayList<String> stores = new ArrayList<String>();
+                    final ArrayList<String> stores = new ArrayList<String>();
                     ArrayList<Double> storeBalance = new ArrayList<Double>();
 
                     HashMap<String, String> merchantLogos = new HashMap<String, String>();
@@ -91,7 +98,9 @@ public class FragmentHome extends Fragment {
                         ItemRecipe item = new ItemRecipe();
                         item.setRecipe(stores.get(i));
                         item.setImg(merchantLogos.get(stores.get(i)));
-                        item.setTime(storeBalance.get(i));
+
+                        double rounded = (double)Math.round(storeBalance.get(i)*100)/100;
+                        item.setTime(rounded);
                         itemStores.add(item);
                     }
 
@@ -108,7 +117,12 @@ public class FragmentHome extends Fragment {
                         @Override
                         public void onClick(View view, int position) {
                             Log.d("test",position + "");
-                            //startActivity(new Intent(getActivity(), Detail.class));
+
+                            String company = stores.get(position);
+
+                            PiggyBApplication.applicationState.merchant = company;
+
+                            startActivity(new Intent(rootRoot, RedeemActivity.class));
                             //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
                         }
 
