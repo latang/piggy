@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MerchantTerminalActivity">
 
-    <Button
-        android:id="@+id/sendButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/customerID"
         android:layout_width="wrap_content"
@@ -47,6 +34,22 @@
         app:layout_constraintTop_toBottomOf="@+id/storeName"
         app:srcCompat="@drawable/logo" />
 
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="102dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/circle"
+        android:drawableTop="@android:drawable/ic_menu_send"
+        android:paddingTop="20dp"
+        android:text="@string/send"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/sendAmount"
         android:layout_width="wrap_content"
@@ -69,6 +72,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Welcome, "
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -101,5 +105,7 @@
             android:layout_weight="1"
             android:text="Add to Balance" />
     </RadioGroup>
+
+
 
 </android.support.constraint.ConstraintLayout>

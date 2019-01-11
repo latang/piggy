@@ -167,14 +167,44 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 
                 final double change = Double.parseDouble(inputSendAmount);
 
+                Log.d(TAG,"change: " + change);
+
                 DatabaseReference customersRef = mDatabase.child("customerInformation");
 
                 if(storeCredit.isChecked()){
                     Log.d(TAG, "storeCredit");
 
+                    DatabaseReference testRef = mDatabase.child("customerInformation");
+
+                    final Result result = new Result();
+
+                    String currStoreName = storeName.getText().toString();
+
+                    final String currStoreNameConst = currStoreName.substring(9, currStoreName.length());
+
+                    testRef.child(inputPhoneNum).child("Stores").child(currStoreNameConst).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (!result.once) {
+                                double credit = 0.0;
+                                if(dataSnapshot.exists()){
+                                    credit = dataSnapshot.getValue(Double.class);
+                                }
+
+                                double newCredit = credit + change;
+                                DatabaseReference ref = mDatabase.child("customerInformation");
+                                ref.child(inputPhoneNum).child("Stores").child(currStoreNameConst).setValue(newCredit);
+
+                                result.once = true;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
+
                 }
                 else{
-                    Log.d(TAG,"balance");
 
                     DatabaseReference testRef = mDatabase.child("customerInformation");
 
@@ -185,19 +215,11 @@ public class MerchantTerminalActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot != null && !result.once) {
                                 double balance = dataSnapshot.getValue(Double.class);
-                                Log.d("test", "initial: " + balance);
-
-
-                                String currStoreName = storeName.getText().toString();
-
-                                currStoreName = currStoreName.substring(9, currStoreName.length());
 
                                 double newBalance = balance + change;
-                                currentBalance = balance;
                                 DatabaseReference ref = mDatabase.child("customerInformation");
                                 ref.child(inputPhoneNum).child("totalBalance").setValue(newBalance);
 
-                                Log.d("test", "inside: " + newBalance);
                                 result.once = true;
                             }
                         }
@@ -218,10 +240,9 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 //
 //                newInformation.setValue(new Post(inputPhoneNum,change));
 
+                showToast("Transaction complete!");
                 customerPhoneNum.setText("");
                 sendAmount.setText("");
-
-//                progressBar.setVisibility(View.INVISIBLE);
 
             }
         });

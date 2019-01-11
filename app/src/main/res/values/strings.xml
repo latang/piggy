@@ -17,6 +17,6 @@
     <color name="white">#FFFFFF</color>
 
     <string name="customer_phone_num">Customer Phone Number</string>
-    <string name="desired_amount">Enter Desired Amount</string>
+    <string name="desired_amount">Enter Amount Change</string>
     <string name="send">Oink</string>
 </resources>
