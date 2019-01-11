@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.summit.summitproject.prebuilt.recycler.ItemRecipe;
 import com.summit.summitproject.prebuilt.recycler.RecipeAdapter;
 import com.summit.summitproject.prebuilt.recycler.RecyclerTouchListener;
+import com.summit.summitproject.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null, false);
 
-       // ((CustomerBalanceActivity)getActivity()).setupToolbar(R.id.toolbar, "DESSERT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+        ((CustomerBalanceActivity)getActivity()).setupToolbar(R.id.toolbar, "STORE CREDIT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 

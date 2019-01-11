@@ -7,7 +7,7 @@
             android:title="SEARCH" />
         <item
             android:id="@+id/redeem"
-            android:title="REDEEM" />
+            android:title="REDEEM" />`
         <item
             android:id="@+id/send"
             android:title="SEND TO BANK ACCOUNT" />
