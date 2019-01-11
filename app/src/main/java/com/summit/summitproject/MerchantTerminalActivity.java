@@ -38,7 +38,7 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-    public Double currentBalance;
+    private double currentBalance = 0.0;
 
     private RadioButton balance;
     private RadioButton storeCredit;
@@ -155,35 +155,53 @@ public class MerchantTerminalActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String inputPhoneNum = customerPhoneNum.getText().toString().trim();
+                final String inputPhoneNum = customerPhoneNum.getText().toString().trim();
                 String inputSendAmount = sendAmount.getText().toString().trim();
 
-                double change = Double.parseDouble(inputSendAmount);
+                final double change = Double.parseDouble(inputSendAmount);
 
                 DatabaseReference customersRef = mDatabase.child("customerInformation");
 
                 if(storeCredit.isChecked()){
                     Log.d(TAG, "storeCredit");
+
                 }
                 else{
                     Log.d(TAG,"balance");
 
                     DatabaseReference testRef = mDatabase.child("customerInformation");
 
+                    final Result result = new Result();
+
                     testRef.child(inputPhoneNum).child("totalBalance").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            double balance = dataSnapshot.getValue(Double.class);
-                            currentBalance = balance;
-                            Log.d("test","method balance: " + currentBalance);
+                            if (dataSnapshot != null && !result.once) {
+                                double balance = dataSnapshot.getValue(Double.class);
+                                Log.d("test", "initial: " + balance);
+
+
+                                String currStoreName = storeName.getText().toString();
+
+                                currStoreName = currStoreName.substring(9, currStoreName.length());
+
+                                double newBalance = balance + change;
+                                currentBalance = balance;
+                                DatabaseReference ref = mDatabase.child("customerInformation");
+                                ref.child(inputPhoneNum).child("totalBalance").setValue(newBalance);
+
+                                Log.d("test", "inside: " + newBalance);
+                                result.once = true;
+                            }
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {}
                     });
 
-                    Log.d("test","after balance: " + currentBalance);
                 }
+
+               // Log.d("test","after: " + currentBalance);
 
 //                progressBar.setVisibility(View.VISIBLE);
 
@@ -223,5 +241,13 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 
         }
     };
+
+    public class Result {
+        public boolean once;
+
+        public Result() {
+            once = false;
+        }
+    }
 
 }
