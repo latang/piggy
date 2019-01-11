@@ -9,36 +9,42 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/logo"
         android:name=".PiggyBApplication"
+        android:allowBackup="true"
         android:exported="true"
-
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-
         <activity
             android:name=".Splash"
-            android:theme="@style/Full"
+            android:exported="true"
             android:label="@string/app_name"
-            android:exported="true">
+            android:theme="@style/Full">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MerchantTerminalActivity" android:exported="true"/>
-        <activity android:name=".LoginActivity" android:exported="true"/>
-        <activity android:name=".SummaryActivity" android:exported="true"/>
+        <activity
+            android:name=".MerchantTerminalActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SummaryActivity"
+            android:exported="true" />
         <activity
             android:name=".CustomerBalanceActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".RedeemActivity"
+            android:label="@string/title_activity_redeem"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -19,4 +19,5 @@
     <string name="customer_phone_num">Customer Phone Number</string>
     <string name="desired_amount">Enter Amount Change</string>
     <string name="send">Oink</string>
+    <string name="title_activity_redeem">RedeemActivity</string>
 </resources>
