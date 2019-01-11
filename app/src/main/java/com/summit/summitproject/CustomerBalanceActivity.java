@@ -1,5 +1,6 @@
 package com.summit.summitproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -59,6 +61,7 @@ public class CustomerBalanceActivity extends BaseActivity
     private String customerPhoneNum;
     private TextView balance;
     private TextView name;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,29 +72,32 @@ public class CustomerBalanceActivity extends BaseActivity
         setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
 
-
+        activity = this;
         FragmentTransaction ft;
-        FragmentHome fragmentHome = new FragmentHome();
+        FragmentHome fragmentHome = new FragmentHome(activity);
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayout, fragmentHome).commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         //customerPhoneNum = findViewById(R.id.username);
         customerPhoneNum = PiggyBApplication.applicationState.phoneNumber;
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_burger);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+
         View headerView = navigationView.getHeaderView(0);
         balance = headerView.findViewById(R.id.BalanceView);
         name = headerView.findViewById(R.id.CustomerName);
@@ -127,7 +133,6 @@ public class CustomerBalanceActivity extends BaseActivity
                 });
 
 
-        //navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
@@ -270,7 +275,7 @@ public class CustomerBalanceActivity extends BaseActivity
 
 
 
-/*    @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -278,5 +283,5 @@ public class CustomerBalanceActivity extends BaseActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 }
