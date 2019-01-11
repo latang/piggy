@@ -139,7 +139,7 @@ public class FragmentHome extends Fragment {
 
         return view;
     }
-  
+
     private List<ItemRecipe> setupRecipe(){
         itemList = new ArrayList<>();
         String recipe[] = {"BLOOD ORANGE CAKE", "SEMIFREDDO TIRAMISU", "MARBLE CAKE", "RICE PUDDING", "RAINBOW CAKE", "ICE CREAM", "STROWBERRY CAKE", "CUPCAKE FRUIT"};
