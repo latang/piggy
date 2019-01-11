@@ -140,32 +140,6 @@ public class LoginActivity extends BaseActivity {
 
                                 // test
 
-                                String testPhoneNum = "3312096169";
-
-                                Log.d("test", "pls");
-
-                                DatabaseReference testRef = mDatabase.child("customerInformation");
-
-                                Log.d("test", testRef.toString());
-
-                                testRef.child(testPhoneNum).child("Stores").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                        for(DataSnapshot store: dataSnapshot.getChildren()){
-                                            String storeKey = store.getKey();
-                                            double storeVal = store.getValue(Double.class);
-                                            Log.d("test", "key: " + storeKey + ", val: " + storeVal);
-
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-
                                 // end test
 
 
@@ -213,15 +187,39 @@ public class LoginActivity extends BaseActivity {
 //                // Kick off the login network call
 //                loginManager.execute();
             public void onClick(View view) {
+
                 final String inputtedUsername = username.getText().toString();
                 final String inputtedPassword = password.getText().toString();
 
-                PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
-                PiggyBApplication.applicationState.password = inputtedPassword;
+                if(inputtedUsername.length() != 0 && inputtedPassword.length() != 0) {
 
+                    mDatabase.child("customerInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                                startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
+                                //                            intent.putExtra("phoneNumber",inputtedUsername);
+                            } else {
+                                // User does not exist. NOW call createUserWithEmailAndPassword
+                                showToast("Invalid username and password");
+                                username.setText("");
+                                password.setText("");
+                                // Your previous code here.
 
-                startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+                else{
+                    showToast("Empty username or password");
+                }
             }
         });
 
