@@ -72,10 +72,15 @@ public class CustomerBalanceActivity extends BaseActivity
         setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         activity = this;
 =======
 >>>>>>> 9c2387d8a15b470c0c3695a147e7d0dc0368ac38
+=======
+
+        activity = this;
+>>>>>>> refs/remotes/origin/soukarya
         FragmentTransaction ft;
         FragmentHome fragmentHome = new FragmentHome(activity);
         ft = getSupportFragmentManager().beginTransaction();
