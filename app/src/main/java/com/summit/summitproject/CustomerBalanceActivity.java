@@ -2,11 +2,14 @@ package com.summit.summitproject;
 
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,7 +19,9 @@ import com.bumptech.glide.Glide;
 import com.summit.summitproject.prebuilt.utils.CircleGlide;
 import com.summit.summitproject.prebuilt.utils.CustomTypefaceSpan;
 import com.summit.summitproject.prebuilt.utils.AppBarStateChangeListener;
+import android.support.v4.app.FragmentTransaction;
 
+import java.io.File;
 
 
 public class CustomerBalanceActivity extends AppCompatActivity
@@ -32,11 +37,16 @@ public class CustomerBalanceActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
 
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -61,7 +71,7 @@ public class CustomerBalanceActivity extends AppCompatActivity
         });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-/*        navigationView.setNavigationItemSelectedListener(
+        navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -76,15 +86,14 @@ public class CustomerBalanceActivity extends AppCompatActivity
                         return true;
                     }
                 });
-                */
 
-        navigationView.setNavigationItemSelectedListener(this);
 
+        //navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
         Glide.with(this)
-                .load(Uri.parse("https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"))
+                .load(Uri.parse("https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png"))
                 .transform(new CircleGlide(this))
                 .into(imageView);
     }
