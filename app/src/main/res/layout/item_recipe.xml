@@ -10,15 +10,17 @@
         android:layout_width="88dp"
         android:layout_height="88dp"
         />
+
     <RatingBar
         android:id="@+id/ratingBar"
+        style="@style/RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space8"
-        android:rating="3.5"
-        android:numStars="5"
         android:isIndicator="true"
-        style="@style/RatingBar"/>
+        android:numStars="5"
+        android:rating="3.5"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/tv_recipe_name"
         android:layout_width="wrap_content"
@@ -29,14 +31,16 @@
         android:textColor="@color/colorTextDark"
         android:gravity="center_horizontal"
         style="@style/SemiBold"/>
+
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_time"
+
         android:drawablePadding="@dimen/space8"
-        android:text="1h 20'"
-        android:textSize="@dimen/h3"
+        android:text="Hello"
+        android:textAppearance="@style/Regular"
         android:textColor="@color/colorTextGrey"
-        android:textAppearance="@style/Regular"/>
+        android:textSize="@dimen/h3"
+        android:visibility="visible" />
 </LinearLayout>

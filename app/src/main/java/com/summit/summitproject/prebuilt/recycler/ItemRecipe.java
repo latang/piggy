@@ -5,14 +5,15 @@ package com.summit.summitproject.prebuilt.recycler;
  */
 
 public class ItemRecipe {
-    String time, recipe, img;
+    String recipe, img;
+    double time;
     float rating;
 
-    public void setTime(String time) {
+    public void setTime(double time) {
         this.time = time;
     }
 
-    public String getTime() {
+    public double getTime() {
         return time;
     }
 
