@@ -9,6 +9,7 @@ public class PiggyBApplication extends Application {
     public static class ApplicationState{
         String merchant=null;
         String phoneNumber=null;
+        String password = null;
     }
 
 }
