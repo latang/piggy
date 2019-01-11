@@ -11,6 +11,8 @@
     <string name="Customer">%1$s %2$s</string>
     <string name="summary_title">Hello, %1$s</string>
     <string name="summary_subtitle">Your recent transactions for Card x%1$s:</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <color name="white">#FFFFFF</color>
 
