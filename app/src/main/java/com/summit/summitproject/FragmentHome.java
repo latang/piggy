@@ -86,6 +86,9 @@ public class FragmentHome extends Fragment {
                     merchantLogos.put("Starbucks", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0002/1075/brand.gif?itok=Y4thjsx8");
                     merchantLogos.put("CVS", "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0001/9828/brand.gif?itok=jH0GIqpO");
                     merchantLogos.put("Target", "https://natific.com/wp-content/uploads/2018/09/1-target-logo.jpg");
+                    merchantLogos.put("McDonalds", "https://media.glassdoor.com/sqll/432/mcdonald-s-squarelogo-1529956196758.png");
+                    merchantLogos.put("Chipotle", "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0021/8854/brand.gif?itok=QyuTSX00");
+                    merchantLogos.put("Roots", "http://www.rootsnaturalkitchen.com/wp-content/uploads/2018/01/Leaf-Orange.png");
                     merchantLogos.put("Best Buy", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0023/5388/brand.gif?itok=6YcMRAjS");
 
                     for (DataSnapshot store : dataSnapshot.getChildren()) {
