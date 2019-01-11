@@ -1,6 +1,7 @@
 package com.summit.summitproject;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,16 +64,16 @@ public class CustomerBalanceActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_balance);
-        //setContentView(R.layout.nav_header_main);
 
+        FragmentTransaction ft;
+        FragmentHome fragmentHome = new FragmentHome();
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, fragmentHome).commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //customerPhoneNum = findViewById(R.id.username);
         customerPhoneNum = PiggyBApplication.applicationState.phoneNumber;
-
-
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
@@ -86,7 +89,6 @@ public class CustomerBalanceActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         balance = headerView.findViewById(R.id.BalanceView);
         name = headerView.findViewById(R.id.CustomerName);
-        Log.d(TAG, "name" + name +" balance: " + balance);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -145,13 +147,13 @@ public class CustomerBalanceActivity extends AppCompatActivity
 
                         // Stuff that updates the UI
 
-                        //name.setText(getString(R.string.CustomerName, firstName, lastName));
-                        //balance.setText(getString(R.string.balance, b));
-                        name.setText(firstName + " " + lastName);
-                        balance.setText("$" + String.valueOf(b));
-                    }
-                });
-            }
+                    //name.setText(getString(R.string.CustomerName, firstName, lastName));
+                    //balance.setText(getString(R.string.balance, b));
+                    name.setText(firstName + " " + lastName);
+                    balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
+                }
+            });
+        }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -160,18 +162,12 @@ public class CustomerBalanceActivity extends AppCompatActivity
         });
 
 
-
-
-
 //                            for(DataSnapshot store: dataSnapshot.getChildren()){
 //                                String storeKey = store.getKey();
 //                                double storeVal = store.getValue(Double.class);
 //                                Log.d(“test”, “key: ” + storeKey + “, val: ” + storeVal);
 //
 //                            }
-
-
-
 
 
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -237,6 +233,29 @@ public class CustomerBalanceActivity extends AppCompatActivity
             }
         });
     }
+
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/SourceSansPro-Semibold.otf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+
 
 /*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
