@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class MerchantTerminalActivity extends AppCompatActivity {
     private Button sendButton;
 //    private ProgressBar progressBar;
 
+    private ImageView storeIcon;
+
     private NfcNdefReader nfcNdefReader;
     private VibrateFeedback tapFeedback;
 
@@ -54,6 +57,7 @@ public class MerchantTerminalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_merchant_terminal);
 
         storeName = findViewById(R.id.storeName);
+        storeIcon = findViewById(R.id.imageView3);
 
         customerPhoneNum = findViewById(R.id.customerID);
         sendAmount = findViewById(R.id.sendAmount);
@@ -87,6 +91,7 @@ public class MerchantTerminalActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 final String value = dataSnapshot.getValue(String.class);
+                final String img = (dataSnapshot.getValue(String.class)).replaceAll("\\s", "").toLowerCase();
                 runOnUiThread(new Runnable() {
 
                     @Override
@@ -94,6 +99,8 @@ public class MerchantTerminalActivity extends AppCompatActivity {
 
                         // Stuff that updates the UI
                         storeName.setText("Welcome, " + value);
+                        storeIcon.setImageResource(getResources().getIdentifier(img, "drawable", getPackageName()));
+
                     }
                 });
             }
