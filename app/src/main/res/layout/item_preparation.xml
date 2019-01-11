@@ -3,15 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/space16">
+
     <TextView
         android:id="@+id/tv_number"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:textSize="@dimen/h2"
+        android:background="@drawable/bg_number"
         android:gravity="center"
-        android:textColor="@color/colorTextGrey"
         android:textAppearance="@style/Regular"
-        android:background="@drawable/bg_number"/>
+        android:textColor="@color/colorTextGrey"
+        android:textSize="@dimen/h2"
+        android:visibility="invisible" />
     <ImageView
         android:id="@+id/iv_done"
         android:layout_width="wrap_content"
