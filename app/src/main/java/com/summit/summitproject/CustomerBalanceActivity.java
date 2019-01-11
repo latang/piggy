@@ -62,6 +62,8 @@ public class CustomerBalanceActivity extends BaseActivity
     private TextView balance;
     private TextView name;
     private Activity activity;
+    ActionBar actionbar;
+    Boolean setup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +73,15 @@ public class CustomerBalanceActivity extends BaseActivity
 
         setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
-
         activity = this;
         FragmentTransaction ft;
         FragmentHome fragmentHome = new FragmentHome(activity);
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayout, fragmentHome).commit();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        //customerPhoneNum = findViewById(R.id.username);
         customerPhoneNum = PiggyBApplication.applicationState.phoneNumber;
 
         ActionBar actionbar = getSupportActionBar();
@@ -103,6 +103,38 @@ public class CustomerBalanceActivity extends BaseActivity
         name = headerView.findViewById(R.id.CustomerName);
         Log.d(TAG, "name" + name +" balance: " + balance);
 
+        // Firebase stuff
+        mDatabase = FirebaseDatabase.getInstance().getReference("data");
+
+        mDatabase.child("customerInformation").child(customerPhoneNum).addListenerForSingleValueEvent( new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String firstName = (String) dataSnapshot.child("mFirstName").getValue();
+                final String lastName = (String) dataSnapshot.child("mLastName").getValue();
+                final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+
+                        //name.setText(getString(R.string.CustomerName, firstName, lastName));
+                        //balance.setText(getString(R.string.balance, b));
+                        name.setText(firstName + " " + lastName);
+                        balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "Retrieve failed.");
+            }
+        });
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -110,6 +142,33 @@ public class CustomerBalanceActivity extends BaseActivity
                         int id = menuItem.getItemId();
 
                         if (id == R.id.search) {
+
+                                // Firebase stuff
+                                mDatabase = FirebaseDatabase.getInstance().getReference("data");
+
+                                mDatabase.child("customerInformation").child(customerPhoneNum).addListenerForSingleValueEvent( new ValueEventListener() {
+
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                                // Stuff that updates the UI
+                                                balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.d(TAG, "Retrieve failed.");
+                                    }
+                                });
+
+
                             // Handle the camera action
                         } else if (id == R.id.redeem) {
 
@@ -134,58 +193,13 @@ public class CustomerBalanceActivity extends BaseActivity
 
 
 
+
         View header = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
         Glide.with(this)
                 .load(Uri.parse("https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png"))
                 .transform(new CircleGlide(this))
                 .into(imageView);
-
-        // Firebase stuff
-        mDatabase = FirebaseDatabase.getInstance().getReference("data");
-
-        mDatabase.child("customerInformation").child(customerPhoneNum).addListenerForSingleValueEvent( new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String firstName = (String) dataSnapshot.child("mFirstName").getValue();
-                final String lastName = (String) dataSnapshot.child("mLastName").getValue();
-                final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        // Stuff that updates the UI
-
-                    //name.setText(getString(R.string.CustomerName, firstName, lastName));
-                    //balance.setText(getString(R.string.balance, b));
-                    name.setText(firstName + " " + lastName);
-                    balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
-                }
-            });
-        }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "Retrieve failed.");
-            }
-        });
-
-
-
-
-
-//                            for(DataSnapshot store: dataSnapshot.getChildren()){
-//                                String storeKey = store.getKey();
-//                                double storeVal = store.getValue(Double.class);
-//                                Log.d(“test”, “key: ” + storeKey + “, val: ” + storeVal);
-//
-//                            }
-
-
-
 
 
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -210,14 +224,6 @@ public class CustomerBalanceActivity extends BaseActivity
             }
         });
 
-
-
-        //final String phoneNumber = PiggyBApplication.applicationState.phoneNumber;
-
-//        String customerNum = customerPhoneNum.getText().toString();
-//        System.out.println(customerNum);
-
-        //Log.d(TAG, customerPhoneNum.toString());
 
     }
 
