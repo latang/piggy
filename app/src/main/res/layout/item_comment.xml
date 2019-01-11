@@ -7,18 +7,20 @@
         android:id="@+id/iv_user"
         android:layout_width="45dp"
         android:layout_height="45dp" />
+
     <RatingBar
         android:id="@+id/ratingBar"
+        style="@style/RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/space16"
         android:layout_marginBottom="@dimen/space8"
-        android:rating="3.5"
-        android:numStars="5"
+        android:layout_toRightOf="@id/iv_user"
         android:isIndicator="true"
-        style="@style/RatingBar"
-        android:layout_toRightOf="@id/iv_user"/>
+        android:numStars="5"
+        android:rating="3.5"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
