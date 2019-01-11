@@ -165,6 +165,11 @@ public class MerchantTerminalActivity extends AppCompatActivity {
                 final String inputPhoneNum = customerPhoneNum.getText().toString().trim();
                 String inputSendAmount = sendAmount.getText().toString().trim();
 
+                if(inputPhoneNum.length() == 0 && inputSendAmount.length() == 0){
+                    showToast("Empty amount or phone number!");
+                    return;
+                }
+
                 final double change = Double.parseDouble(inputSendAmount);
 
                 Log.d(TAG,"change: " + change);
