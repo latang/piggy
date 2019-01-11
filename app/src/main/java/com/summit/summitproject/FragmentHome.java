@@ -98,7 +98,9 @@ public class FragmentHome extends Fragment {
                         ItemRecipe item = new ItemRecipe();
                         item.setRecipe(stores.get(i));
                         item.setImg(merchantLogos.get(stores.get(i)));
-                        item.setTime(storeBalance.get(i));
+
+                        double rounded = (double)Math.round(storeBalance.get(i)*100)/100;
+                        item.setTime(rounded);
                         itemStores.add(item);
                     }
 
@@ -110,6 +112,25 @@ public class FragmentHome extends Fragment {
                     recyclerView.setAdapter(mAdapter);
 
                     appCompatActivity = (AppCompatActivity) getActivity();
+
+                    recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            Log.d("test",position + "");
+
+                            String company = stores.get(position);
+
+                            PiggyBApplication.applicationState.merchant = company;
+
+                            startActivity(new Intent(rootRoot, RedeemActivity.class));
+                            //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
+                        }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
+                    }));
 
                 }
             }
@@ -129,25 +150,6 @@ public class FragmentHome extends Fragment {
 //        recyclerView.setAdapter(mAdapter);
 //
 //        appCompatActivity = (AppCompatActivity) getActivity();
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Log.d("test",position + "");
-
-//                String company = stores.get(position);
-//
-//                PiggyBApplication.applicationState.merchant = company;
-
-                startActivity(new Intent(rootRoot, RedeemActivity.class));
-                //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
 
         return view;
     }
