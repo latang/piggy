@@ -193,7 +193,7 @@ public class LoginActivity extends BaseActivity {
 
                 if(inputtedUsername.length() != 0 && inputtedPassword.length() != 0) {
 
-                    mDatabase.child("merchantInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    mDatabase.child("customerInformation").child(inputtedUsername).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
