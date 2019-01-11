@@ -78,7 +78,7 @@ public class FragmentHome extends Fragment {
                     merchantLogos.put("Capital One", "https://media.licdn.com/dms/image/C4E0BAQH1WUsgUQF5uQ/company-logo_200_200/0?e=2159024400&v=beta&t=d7N3nQtFNKTpmLVd0NCCA5Y7NpZiw0Aoy1GGheQy2FY");
                     merchantLogos.put("Starbucks", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0002/1075/brand.gif?itok=Y4thjsx8");
                     merchantLogos.put("CVS", "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0001/9828/brand.gif?itok=jH0GIqpO");
-                    merchantLogos.put("Target", "https://natific.com/wp-content/uploads/2018/09/1-target-logo.jpg");
+                    merchantLogos.put("Target", "https://prd-wret.s3-us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/atom_page_thumbnail/public/thumbnails/image/target.png?itok=s7OBY0HH");
                     merchantLogos.put("Best Buy", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0023/5388/brand.gif?itok=6YcMRAjS");
 
                     for (DataSnapshot store : dataSnapshot.getChildren()) {
@@ -107,9 +107,6 @@ public class FragmentHome extends Fragment {
                     recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
                         @Override
                         public void onClick(View view, int position) {
-                            Log.d("test",position + "");
-                            //startActivity(new Intent(getActivity(), Detail.class));
-                            //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
                         }
 
                         @Override
