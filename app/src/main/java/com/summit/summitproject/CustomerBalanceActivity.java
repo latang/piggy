@@ -92,6 +92,19 @@ public class CustomerBalanceActivity extends AppCompatActivity
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        int id = menuItem.getItemId();
+
+                        if (id == R.id.search) {
+                            // Handle the camera action
+                        } else if (id == R.id.redeem) {
+
+                        } else if (id == R.id.send) {
+
+                        } else if (id == R.id.sign_out) {
+                            startActivity(new Intent(CustomerBalanceActivity.this, LoginActivity.class));
+                        } else if (id == R.id.setting) {
+
+                        }
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
