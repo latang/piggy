@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#f78fb3</color> // #f78fb3 // top bar color
     <color name="colorPrimaryDark">#e582a4</color>// #e582a4 // background color where time is
-    <color name="colorAccent">#f78fb3</color>
+    <color name="colorAccent">#e582a4</color>
 
     <color name="colorPink">#E82D50</color>
     <color name="colorWhiteTrans">#E6FFFFFF</color>
