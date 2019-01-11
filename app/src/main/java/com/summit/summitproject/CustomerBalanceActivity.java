@@ -79,7 +79,7 @@ public class CustomerBalanceActivity extends AppCompatActivity
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -132,31 +132,31 @@ public class CustomerBalanceActivity extends AppCompatActivity
 
         mDatabase.child("customerInformation").child(customerPhoneNum).addListenerForSingleValueEvent( new ValueEventListener() {
 
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            final String firstName = (String) dataSnapshot.child("mFirstName").getValue();
-            final String lastName = (String) dataSnapshot.child("mLastName").getValue();
-            final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String firstName = (String) dataSnapshot.child("mFirstName").getValue();
+                final String lastName = (String) dataSnapshot.child("mLastName").getValue();
+                final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
 
-            runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
 
-                @Override
-                public void run() {
+                    @Override
+                    public void run() {
 
-                    // Stuff that updates the UI
+                        // Stuff that updates the UI
 
-                    //name.setText(getString(R.string.CustomerName, firstName, lastName));
-                    //balance.setText(getString(R.string.balance, b));
-                    name.setText(firstName + " " + lastName);
-                    balance.setText("$" + String.valueOf(b));
-                }
-            });
-        }
+                        //name.setText(getString(R.string.CustomerName, firstName, lastName));
+                        //balance.setText(getString(R.string.balance, b));
+                        name.setText(firstName + " " + lastName);
+                        balance.setText("$" + String.valueOf(b));
+                    }
+                });
+            }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            Log.d(TAG, "Retrieve failed.");
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "Retrieve failed.");
+            }
         });
 
 
