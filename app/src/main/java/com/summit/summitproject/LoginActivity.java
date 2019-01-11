@@ -100,21 +100,21 @@ public class LoginActivity extends BaseActivity {
         username.setText(sharedPreferences.getString(PREF_USERNAME, ""));
         password.setText(sharedPreferences.getString(PREF_PASSWORD, ""));
 
-        //change later
-        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
-        client.CUSTOMER.getCustomers(new NessieResultsListener() {
-            @Override
-            public void onSuccess(Object result) {
-                List<Customer> customers = (List<Customer>) result;
-                // do something with the list of customers here
-                Log.d("LoginActivity", customers.toString());
-            }
-
-            @Override
-            public void onFailure(NessieError error) {
-                // handle error
-            }
-        });
+//        //change later
+//        NessieClient client = NessieClient.getInstance("f5004659b7801782b99edc81141d0fd1");
+//        client.CUSTOMER.getCustomers(new NessieResultsListener() {
+//            @Override
+//            public void onSuccess(Object result) {
+//                List<Customer> customers = (List<Customer>) result;
+//                // do something with the list of customers here
+//                Log.d("LoginActivity", customers.toString());
+//            }
+//
+//            @Override
+//            public void onFailure(NessieError error) {
+//                // handle error
+//            }
+//        });
     }
 
     /**
