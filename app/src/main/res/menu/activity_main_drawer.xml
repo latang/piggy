@@ -9,8 +9,8 @@
             android:id="@+id/redeem"
             android:title="REDEEM" />
         <item
-            android:id="@+id/saved"
-            android:title="SAVED RECIPES" />
+            android:id="@+id/send"
+            android:title="SEND TO BANK ACCOUNT" />
         <item
             android:id="@+id/setting"
             android:title="SETTINGS" />
