@@ -1,5 +1,6 @@
 package com.summit.summitproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -59,6 +60,7 @@ public class CustomerBalanceActivity extends BaseActivity
     private String customerPhoneNum;
     private TextView balance;
     private TextView name;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +71,9 @@ public class CustomerBalanceActivity extends BaseActivity
         setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
 
-
+        activity = this;
         FragmentTransaction ft;
-        FragmentHome fragmentHome = new FragmentHome();
+        FragmentHome fragmentHome = new FragmentHome(activity);
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayout, fragmentHome).commit();
 

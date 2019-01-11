@@ -1,6 +1,7 @@
 package com.summit.summitproject;
 
 import android.app.Application;
+import android.content.Context;
 
 public class PiggyBApplication extends Application {
 
@@ -10,6 +11,7 @@ public class PiggyBApplication extends Application {
         String merchant=null;
         String phoneNumber=null;
         String password = null;
+        Context context = null;
     }
 
 }
