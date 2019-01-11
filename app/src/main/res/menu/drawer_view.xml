@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_"
+            android:id="@+id/nav_balance"
             android:icon="@drawable/ic_attach_money"
             android:title="@string/balance" />
         <item

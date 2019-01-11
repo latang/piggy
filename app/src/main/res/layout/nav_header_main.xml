@@ -17,15 +17,16 @@
         android:layout_marginTop="@dimen/space24" />
 
     <TextView
+        android:id="@+id/CustomerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space8"
-        android:text="@string/Customer"
+        android:text="@string/CustomerName"
         android:textColor="@android:color/white"
         android:textSize="@dimen/h3"
         android:textAppearance="@style/SemiBold"/>
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/BalanceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/balance"

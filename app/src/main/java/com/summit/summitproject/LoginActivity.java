@@ -213,7 +213,15 @@ public class LoginActivity extends BaseActivity {
 //                // Kick off the login network call
 //                loginManager.execute();
             public void onClick(View view) {
+                final String inputtedUsername = username.getText().toString();
+                final String inputtedPassword = password.getText().toString();
+
+                PiggyBApplication.applicationState.phoneNumber = inputtedUsername;
+                PiggyBApplication.applicationState.password = inputtedPassword;
+
+
                 startActivity(new Intent(LoginActivity.this, CustomerBalanceActivity.class));
+
             }
         });
 
