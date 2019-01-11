@@ -4,5 +4,12 @@
     <color name="colorPrimaryDark">#e582a4</color>// #e582a4 // background color where time is
     <color name="colorAccent">#f78fb3</color>
 
+    <color name="colorPink">#E82D50</color>
+    <color name="colorWhiteTrans">#E6FFFFFF</color>
+    <color name="colorPinkTrans">#E6E82D50</color>
+    <color name="colorTextDark">#434B5B</color>
+    <color name="colorTextGrey">#8E939E</color>
+    <color name="colorPinkDark">#A8213A</color>
+
     <color name="black_overlay">#66000000</color>
 </resources>
