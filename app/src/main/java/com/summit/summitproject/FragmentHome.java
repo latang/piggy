@@ -49,7 +49,7 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null, false);
 
-        ((CustomerBalanceActivity)getActivity()).setupToolbar(R.id.toolbar, "DESSERT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+        ((CustomerBalanceActivity)getActivity()).setupToolbar(R.id.toolbar, "STORE CREDIT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
