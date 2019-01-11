@@ -60,6 +60,8 @@ public class CustomerBalanceActivity extends BaseActivity
     private String customerPhoneNum;
     private TextView balance;
     private TextView name;
+    ActionBar actionbar;
+    Boolean setup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,29 +69,30 @@ public class CustomerBalanceActivity extends BaseActivity
         setContentView(R.layout.activity_customer_balance);
         //setContentView(R.layout.nav_header_main);
 
-        setupToolbar(R.id.toolbar, "COOK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+        setup = setupToolbar(R.id.toolbar, "OINK IT", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+
 
         FragmentTransaction ft;
         FragmentHome fragmentHome = new FragmentHome();
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayout, fragmentHome).commit();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
         //customerPhoneNum = findViewById(R.id.username);
         customerPhoneNum = PiggyBApplication.applicationState.phoneNumber;
 
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_burger);
+        //actionbar = getSupportActionBar();
+      //  actionbar.setDisplayHomeAsUpEnabled(true);
+       // actionbar.setHomeAsUpIndicator(R.drawable.ic_burger);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
@@ -98,44 +101,6 @@ public class CustomerBalanceActivity extends BaseActivity
         balance = headerView.findViewById(R.id.BalanceView);
         name = headerView.findViewById(R.id.CustomerName);
         Log.d(TAG, "name" + name +" balance: " + balance);
-
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        int id = menuItem.getItemId();
-
-                        if (id == R.id.search) {
-                            // Handle the camera action
-                        } else if (id == R.id.redeem) {
-
-                        } else if (id == R.id.send) {
-
-                        } else if (id == R.id.sign_out) {
-                            startActivity(new Intent(CustomerBalanceActivity.this, LoginActivity.class));
-                        } else if (id == R.id.setting) {
-
-                        }
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
-
-
-
-        View header = navigationView.getHeaderView(0);
-        ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
-        Glide.with(this)
-                .load(Uri.parse("https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png"))
-                .transform(new CircleGlide(this))
-                .into(imageView);
 
         // Firebase stuff
         mDatabase = FirebaseDatabase.getInstance().getReference("data");
@@ -155,19 +120,89 @@ public class CustomerBalanceActivity extends BaseActivity
 
                         // Stuff that updates the UI
 
-                    //name.setText(getString(R.string.CustomerName, firstName, lastName));
-                    //balance.setText(getString(R.string.balance, b));
-                    name.setText(firstName + " " + lastName);
-                    balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
-                }
-            });
-        }
+                        //name.setText(getString(R.string.CustomerName, firstName, lastName));
+                        //balance.setText(getString(R.string.balance, b));
+                        name.setText(firstName + " " + lastName);
+                        balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
+                    }
+                });
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d(TAG, "Retrieve failed.");
             }
         });
+
+
+
+                navigationView.setNavigationItemSelectedListener(
+                        new NavigationView.OnNavigationItemSelectedListener() {
+                            @Override
+                            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                                int id = menuItem.getItemId();
+
+                                if (id == R.id.search) {
+
+                                        // Firebase stuff
+                                        mDatabase = FirebaseDatabase.getInstance().getReference("data");
+
+                                        mDatabase.child("customerInformation").child(customerPhoneNum).addListenerForSingleValueEvent( new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                final Double b = (Double) dataSnapshot.child("totalBalance").getValue();
+
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+
+                                                        // Stuff that updates the UI
+                                                        balance.setText("$" + String.valueOf((double)Math.round(b*100)/100));
+                                                    }
+                                                });
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Log.d(TAG, "Retrieve failed.");
+                                            }
+                                        });
+
+
+                                    // Handle the camera action
+                                } else if (id == R.id.redeem) {
+
+                                } else if (id == R.id.send) {
+
+                                } else if (id == R.id.sign_out) {
+                                    startActivity(new Intent(CustomerBalanceActivity.this, LoginActivity.class));
+                                } else if (id == R.id.setting) {
+
+                                }
+                                // set item as selected to persist highlight
+                                menuItem.setChecked(true);
+                                // close drawer when item is tapped
+                                mDrawerLayout.closeDrawers();
+
+                                // Add code here to update the UI based on the item selected
+                                // For example, swap UI fragments here
+
+                                return true;
+                            }
+                        });
+
+
+
+
+        View header = navigationView.getHeaderView(0);
+        ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
+        Glide.with(this)
+                .load(Uri.parse("https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png"))
+                .transform(new CircleGlide(this))
+                .into(imageView);
+
+
 
 
 
